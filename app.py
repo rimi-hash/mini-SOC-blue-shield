@@ -14,7 +14,7 @@ login_manager.login_view = "login"
 DB_NAME = "database.db"
 DEVELOPER_WHITELIST = ["127.0.0.1"]
 
-# ---------------- DB ----------------
+
 
 def get_db():
     conn = sqlite3.connect(DB_NAME)
@@ -58,7 +58,7 @@ def create_admin():
         pass
     db.close()
 
-# ---------------- Auth ----------------
+
 
 class User(UserMixin):
     def __init__(self, id, username, password, role):
@@ -76,7 +76,7 @@ def load_user(user_id):
         return User(row["id"], row["username"], row["password"], row["role"])
     return None
 
-# ---------------- Alerts ----------------
+
 
 def raise_alert(level, message):
     db = get_db()
@@ -85,7 +85,7 @@ def raise_alert(level, message):
     db.commit()
     db.close()
 
-# ---------------- UI ----------------
+
 
 BASE_HTML = """
 <!doctype html>
@@ -186,7 +186,7 @@ SIM_HTML = """
 <a class="btn btn-danger" href="/run-sim">Run Attack Simulation</a>
 """
 
-# ---------------- Routes ----------------
+
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -259,7 +259,7 @@ def logout():
     logout_user()
     return redirect(url_for("login"))
 
-# ---------------- Main ----------------
+
 
 if __name__ == "__main__":
     init_db()
